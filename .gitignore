@@ -1,1 +1,55 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+dist
+tmp
+/out-tsc
+
+# dependencies
 node_modules
+.pnpm-store
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+# fix vite.config.timestamp files not being cleaned
+# https://github.com/nrwl/nx/issues/22086
+vite.config.*.timestamp-*
+
+# System Files
+.DS_Store
+Thumbs.db
+
+.nx/cache
+
+storybook-static
+
+# Next.js
+.next
+out
+
+# env
+.env.*.local
+
