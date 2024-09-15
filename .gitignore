@@ -42,7 +42,7 @@ vite.config.*.timestamp-*
 .DS_Store
 Thumbs.db
 
-.nx/cache
+.nx
 
 storybook-static
 
