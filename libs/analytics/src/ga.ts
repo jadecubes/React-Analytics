@@ -21,16 +21,14 @@ export class Ga extends Analytics<BaseAnalyticsEvent> {
   }
 
   initialize () {
-    this.isReady = false
+    this.setIsReady(false)
     const head = document.querySelector('head')
     const existingScript = document.querySelector(`script[src="https://www.googletagmanager.com/gtag/js?id=${this.measurementId}"]`)
     // dataLayer needs to be initialized before GA script is loaded
-    if (!window.dataLayer) {
-      window.dataLayer = window.dataLayer || []
-    }
+    window.dataLayer = window.dataLayer || []
     // https://developers.google.com/tag-platform/devguides/datalayer
     // eslint-disable-next-line prefer-rest-params
-    function gtag () { window.dataLayer.push(arguments) }
+    function gtag () { window.dataLayer?.push(arguments) }
 
     if (!window.gtag) {
       window.gtag = gtag
@@ -43,17 +41,17 @@ export class Ga extends Analytics<BaseAnalyticsEvent> {
       const script = document.createElement('script')
       script.setAttribute('src', `https://www.googletagmanager.com/gtag/js?id=${this.measurementId}`)
       script.async = true
-      script.onload = () => { this.isReady = true }
+      script.onload = () => { this.setIsReady(true) }
       head?.appendChild(script)
     } else {
-      this.isReady = true
+      this.setIsReady(true)
     }
   }
 
   sendAnalyticsEvent (customEvent: BaseAnalyticsEvent): number {
     const { eventName, eventParams } = customEvent
 
-    const gtagEvent: Parameters<typeof window.gtag> = ['event', eventName, eventParams]
+    const gtagEvent = ['event', eventName, eventParams]
 
     if (window.gtag) {
       try {

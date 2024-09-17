@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   return {
     root: __dirname,
-    cacheDir: '../../node_modules/.vite/apps/fortune-panel',
+    cacheDir: '../../node_modules/.vite/apps/AnalyticsApp',
 
     server: {
       port: 3000,
@@ -42,7 +42,7 @@ export default defineConfig(({ mode }) => {
     envPrefix: ['REACT_APP_'],
 
     build: {
-      outDir: '../../dist/apps/fortune-panel',
+      outDir: '../../dist/apps/analyticsApp',
       reportCompressedSize: true,
       commonjsOptions: {
         transformMixedEsModules: true

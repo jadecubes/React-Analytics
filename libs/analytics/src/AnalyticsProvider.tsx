@@ -5,7 +5,6 @@ import { AnalyticsPlatforms, type Analytics } from './analytics'
 import { Ga } from './ga'
 import { Meta } from './meta'
 import { TikTok } from './tiktok'
-import { Cdp } from './cdp'
 
 export const providerInstanceMapping: Record<
 AnalyticsPlatforms,
@@ -13,8 +12,7 @@ AnalyticsPlatforms,
 > = {
   [AnalyticsPlatforms.GA]: (config) => Ga.getInstance(config),
   [AnalyticsPlatforms.META]: (config) => Meta.getInstance(config),
-  [AnalyticsPlatforms.TIKTOK]: (config) => TikTok.getInstance(config),
-  [AnalyticsPlatforms.CDP]: (config) => Cdp.getInstance(config)
+  [AnalyticsPlatforms.TIKTOK]: (config) => TikTok.getInstance(config)
 }
 
 export interface AnalyticsContextProps {

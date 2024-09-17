@@ -9,7 +9,7 @@
     "build": "pnpm nx run-many -t=type-check,build --verbose",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "lint-fix": "eslint --fix apps/fortune-panel --ext .ts,.tsx --max-warnings=0",
+    "lint-fix": "eslint --fix apps/analyticsApp --ext .ts,.tsx --max-warnings=0",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

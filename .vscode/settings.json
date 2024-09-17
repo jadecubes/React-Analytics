@@ -1,0 +1,43 @@
+{
+    "npm.packageManager": "pnpm",
+    "i18n-ally.localesPaths": ["i18n/**/**"],
+    "i18n-ally.keystyle": "nested",
+    "i18n-ally.sourceLanguage": "zh-TW",
+    "i18n-ally.enabledParsers": ["json"],
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    },
+    "i18n-ally.enabledFrameworks": ["i18next", "react", "vscode"],
+    "typescript.preferences.importModuleSpecifier": "project-relative",
+    "colorize.languages": [
+      "typescript",
+    ],
+    "cSpell.words": [
+      "Buygather",
+      "clickaway",
+      "fastpass",
+      "flatsome",
+      "libphonenumber",
+      "navigations",
+      "persistor",
+      "privacypolicies",
+      "Signup",
+      "Skus",
+      "stylex",
+      "stylexjs",
+      "Subship",
+      "tappay"
+    ],
+    "yaml.customTags": [ "!reference sequence" ],
+    "files.exclude": {
+      "node_modules": true,
+      ".nx": true,
+      "dist": true
+    },
+    "files.watcherExclude": {
+      "node_modules": true,
+      ".nx": true,
+      "dist": true
+    }
+  }
+  

@@ -20,7 +20,7 @@ export class Meta extends Analytics<BaseAnalyticsEvent> {
   }
 
   public initialize (): void {
-    this.isReady = false
+    this.setIsReady(false)
     const head = document.querySelector('head')
     const existingScript = document.querySelector('script[src*="connect.facebook.net/en_US/fbevents.js"]')
     // https://www.facebook.com/help/1604282442927573
@@ -40,9 +40,9 @@ export class Meta extends Analytics<BaseAnalyticsEvent> {
       fbq('init', '${this.measurementId}');
       fbq('track', 'PageView');
       `
-      script.onload = () => { this.isReady = true }
+      script.onload = () => { this.setIsReady(true) }
       head?.appendChild(script)
-    } else { this.isReady = true }
+    } else { this.setIsReady(true) }
   }
 
   public sendAnalyticsEvent (customEvent: BaseAnalyticsEvent): number {
