@@ -5,7 +5,7 @@
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "parserOptions": {
-        "project": ["apps/fortune-panel/tsconfig.*?.json"]
+        "project": ["apps/analyticsApp/tsconfig.*?.json"]
       },
       "rules": {}
     },
