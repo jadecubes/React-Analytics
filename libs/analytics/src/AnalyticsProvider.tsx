@@ -1,10 +1,11 @@
-import { createContext, useRef, type ReactNode } from 'react'
+import { createContext, useMemo, useRef, type ReactNode } from 'react'
 import { type BaseAnalyticsEvent } from './events'
 import { useEffectOnce } from './useEffectOnce'
 import { AnalyticsPlatforms, type Analytics } from './analytics'
 import { Ga } from './ga'
 import { Meta } from './meta'
 import { TikTok } from './tiktok'
+import { useCallbackEvent } from './useCallbackEvent'
 
 export const providerInstanceMapping: Record<
 AnalyticsPlatforms,
@@ -30,7 +31,8 @@ interface AnalyticsProviderProps {
 export const AnalyticsProvider = ({ children, config }: AnalyticsProviderProps) => {
   const configuredPlatforms = useRef<AnalyticsPlatforms[]>([])
   const analyticsProviders = useRef<Partial<Record<AnalyticsPlatforms, Analytics<BaseAnalyticsEvent>>>>({})
-  const initializeAnalytics = (config: AnalyticsConfig) => {
+
+  const initializeAnalytics = useCallbackEvent((config: AnalyticsConfig) => {
     configuredPlatforms.current.length = 0
     Object.entries(config).forEach(([platform, config]) => {
       if (config && providerInstanceMapping[platform as AnalyticsPlatforms]) {
@@ -38,12 +40,13 @@ export const AnalyticsProvider = ({ children, config }: AnalyticsProviderProps) 
         analyticsProviders.current[platform as AnalyticsPlatforms] = initializer(config)
       }
     })
-  }
+  })
 
   useEffectOnce(() => {
     initializeAnalytics(config)
   })
-  const processAnalyticsEvent = (event: BaseAnalyticsEvent, platforms?: AnalyticsPlatforms[]) => {
+
+  const processAnalyticsEvent = useCallbackEvent((event: BaseAnalyticsEvent, platforms?: AnalyticsPlatforms[]) => {
     if (platforms) {
       platforms.forEach((platform) => {
         const provider = analyticsProviders.current[platform]
@@ -55,10 +58,17 @@ export const AnalyticsProvider = ({ children, config }: AnalyticsProviderProps) 
         provider?.processAnalyticsEvent(event)
       }
     }
-  }
+  })
+
+  const value = useMemo(
+    () => ({
+      processAnalyticsEvent
+    }),
+    [processAnalyticsEvent]
+  )
 
   return (
-    <AnalyticsContext.Provider value={{ processAnalyticsEvent }}>
+    <AnalyticsContext.Provider value={value}>
       {children}
     </AnalyticsContext.Provider>
   )
